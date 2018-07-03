@@ -41,7 +41,10 @@ class ProductReportPage
     private function checkImportPercentageChange($percentageChange)
     {
         $I = $this->tester;
-        $I->see($percentageChange, self::$importPercentageChangeEl);
+
+        $value = $I->grabTextFrom(self::$importPercentageChangeEl);
+        $I->assertEquals($value, $percentageChange);
+        //$I->canSee($percentageChange, self::$importPercentageChangeEl);
     }
 
     private function checkImportValue($importValue)

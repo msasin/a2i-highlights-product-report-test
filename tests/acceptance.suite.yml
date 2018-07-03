@@ -5,3 +5,4 @@ modules:
             browser: chrome
             url: http://a2id.02.xspreview.pl/ar/
         - \Helper\Acceptance
+        - Asserts

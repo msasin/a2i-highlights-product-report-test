@@ -11,7 +11,15 @@ class Acceptance extends \Codeception\Module
 
     public function getHighlightsValuesToCompare($productName)
     {
-        return $highlightsValuesToCompare[] = file("tests/_data/".$productName);
+        $highlightsValuesToCompare[] = file("tests/_data/".$productName);
+
+        foreach($highlightsValuesToCompare as $chuj) {
+            $highlightsValuesToCompare = str_replace(array("\n", "\r"), '', $chuj);
+
+        }
+        var_dump($highlightsValuesToCompare);
+
+        return $highlightsValuesToCompare;
 
     }
 
