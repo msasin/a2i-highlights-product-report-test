@@ -13,13 +13,14 @@ class Acceptance extends \Codeception\Module
     {
         $highlightsValuesToCompare[] = file("tests/_data/".$productName);
 
-        foreach($highlightsValuesToCompare as $chuj) {
-            $highlightsValuesToCompare = str_replace(array("\n", "\r"), '', $chuj);
+        return $highlightsValuesToCompare = $this::deleteNewlineCharacter($highlightsValuesToCompare);
+    }
 
+    private function deleteNewlineCharacter($highlightsValuesToCompare)
+    {
+        foreach($highlightsValuesToCompare as $value) {
+            return $highlightsValuesToCompare = str_replace(array("\n", "\r"), '', $value);
         }
-        var_dump($highlightsValuesToCompare);
-
-        return $highlightsValuesToCompare;
 
     }
 

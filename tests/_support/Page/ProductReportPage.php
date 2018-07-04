@@ -18,39 +18,35 @@ class ProductReportPage
         $this->tester = $I;
     }
 
-    public function checkHighLights($highlightsValuesToCompare)
-    {
-        $this::checkImportCountryValue($highlightsValuesToCompare[0]);
-        $this::checkImportBiggestCommodity($highlightsValuesToCompare[1]);
-        $this::checkImportPercentageChange($highlightsValuesToCompare[2]);
-        $this::checkImportValue($highlightsValuesToCompare[3]);
-    }
 
-    private function checkImportCountryValue($country)
-    {
-        $I = $this->tester;
-        $I->see($country, self::$importCountryEl);
-    }
 
-    private function checkImportBiggestCommodity($biggestCommodity)
-    {
-        $I = $this->tester;
-        $I->see($biggestCommodity, self::$importBiggestCommodityEl);
-    }
-
-    private function checkImportPercentageChange($percentageChange)
+    public function checkHighLights($productName)
     {
         $I = $this->tester;
 
-        $value = $I->grabTextFrom(self::$importPercentageChangeEl);
-        $I->assertEquals($value, $percentageChange);
-        //$I->canSee($percentageChange, self::$importPercentageChangeEl);
+        $highlightsValuesToCompare = $I->getHighlightsValuesToCompare($productName);
+
+
+        $this::checkHighlightOnWebsite($highlightsValuesToCompare[0], self::$importCountryEl);
+        $this::checkHighlightOnWebsite($highlightsValuesToCompare[1], self::$importBiggestCommodityEl);
+        $this::checkHighlightOnWebsite($highlightsValuesToCompare[2], self::$importPercentageChangeEl);
+        $this::checkHighlightOnWebsite($highlightsValuesToCompare[3], self::$importValueEl);
+
     }
 
-    private function checkImportValue($importValue)
+    private function checkHighlightOnWebsite($expectedValue, $currentValueEl)
     {
         $I = $this->tester;
-        $I->see($importValue, self::$importValueEl);
+        $currentValue = $this::grabTextFromElement($currentValueEl);
+        $I->assertEquals($expectedValue, $currentValue);
+    }
+
+
+
+    private function grabTextFromElement($highlightEl)
+    {
+        $I = $this->tester;
+        return $value = $I->grabTextFrom($highlightEl);
     }
 
 
